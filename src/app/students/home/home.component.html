@@ -1,0 +1,71 @@
+<div class="container mt-4">
+  <table class="table w-75 table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">First Name</th>
+        <th scope="col">Last Name</th>
+        <th scope="col">Subjects</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let student of students$ | async">
+        <th scope="row" class="td-class">{{ student.id }}</th>
+        <td class="td-class">{{ student.firstName }}</td>
+        <td class="td-class">{{ student.lastName }}</td>
+        <td class="td-class">{{ student.subjects }}</td>
+        <td>
+          <div class="d-grid gap-2 d-md-flex justify-content-md-first">
+            <a
+              class="btn btn-success"
+              [routerLink]="['/students/edit', student.id]"
+            >
+              To edit
+            </a>
+            <a class="btn btn-danger" (click)="openDeleteModel(student.id)">
+              Delete
+            </a>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="d-grid mt-5 gap-2 d-md-flex justify-content-md-first">
+    <button class="btn btn-primary me-md-2" routerLink="./add" type="button">
+      Add Subject
+    </button>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="deleteModel"
+  tabindex="-1"
+  aria-labelledby="DeleteModalTitle"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="DeleteModalTitle">
+          Do you really want to delete?
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          To close
+        </button>
+        <button type="button" class="btn btn-danger" (click)="confirmDelete()">
+          Yes
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
