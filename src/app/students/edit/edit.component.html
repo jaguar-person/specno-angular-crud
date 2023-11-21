@@ -1,0 +1,58 @@
+<div class="container mt-5">
+  <button
+    type="button"
+    routerLink="/students"
+    class="btn btn-secondary mb-3"
+    style="
+      --bs-btn-padding-y: 0.25rem;
+      --bs-btn-padding-x: 0.5rem;
+      --bs-btn-font-size: 0.75rem;
+    "
+  >
+    <i class="bi bi-caret-left-fill"></i> To go back
+  </button>
+
+  <legend>Change Student</legend>
+
+  <div class="mb-3">
+    <label for="firstName" class="form-label">First Name:</label>
+    <input
+      type="text"
+      class="form-control"
+      [(ngModel)]="studentForm.firstName"
+      id="firstName"
+    />
+  </div>
+  <div class="mb-3">
+    <label for="lastName" class="form-label">Last Name:</label>
+    <input
+      type="text"
+      class="form-control"
+      [(ngModel)]="studentForm.lastName"
+      id="lastName"
+    />
+  </div>
+
+  <div class="mb-5 d-flex justify-content-between">
+    <div
+      *ngFor="let subject of subjects$ | async"
+      class="d-flex px-2 justify-content-center"
+    >
+      <label for="subject-{{ subject.id }}" class="px-1">{{
+        subject.name
+      }}</label>
+      <input
+        type="checkbox"
+        id="subject-{{ subject.id }}"
+        [checked]="studentForm.subjects.includes(subject.name)"
+        (click)="handleCheckbox(subject.name)"
+      />
+    </div>
+  </div>
+
+  <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+    <button class="btn btn-primary me-md-2" type="submit" (click)="update()">
+      Save Student
+    </button>
+  </div>
+</div>

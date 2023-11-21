@@ -1,0 +1,69 @@
+<div class="container mt-4">
+  <table class="table table-striped w-75">
+    <thead>
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Name</th>
+        <th scope="col">Teacher</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let subject of subjects$ | async">
+        <th scope="row" class="td-class">{{ subject.id }}</th>
+        <td class="td-class">{{ subject.name }}</td>
+        <td class="td-class">{{ subject.teacher }}</td>
+        <td>
+          <div class="d-grid gap-2 d-md-flex justify-content-md-first">
+            <a
+              class="btn btn-success"
+              [routerLink]="['/subjects/edit', subject.id]"
+            >
+              To edit
+            </a>
+            <a class="btn btn-danger" (click)="openDeleteModel(subject.id)">
+              Delete
+            </a>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="d-grid mt-5 gap-2 d-md-flex justify-content-md-first">
+    <button class="btn btn-primary me-md-2" routerLink="./add" type="button">
+      Add Subject
+    </button>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="deleteModel"
+  tabindex="-1"
+  aria-labelledby="DeleteModalTitle"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="DeleteModalTitle">
+          Do you really want to delete?
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          To close
+        </button>
+        <button type="button" class="btn btn-danger" (click)="confirmDelete()">
+          Yes
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
